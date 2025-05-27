@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>Flask Background Video Website</title>
+
+    <style 
+    type="text/css">body { cursor: url('data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAtKvrAGSEngC+p+gAhobRAM678gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQAAAAAEAAAAARQAAAAAAAAAAAAAAAABQAhQQAAAAAAAAAAAAAAABQCAAAAAAAAAAAAAAAAAAAAIAAAAQAAUAAAAAAAAAEAAgIAACBAAAAAAAAAAAAAICAAIiIgAAAAAAAAAAAAAAIAAgAAAgAAAAAAAAAAAAACACAAAUAgAAAAAAAAAAAAAgAgAARQAgFQAAAAAAAAACAAAgAAAAAUMQAAAAEAAAICAAAgAAAAExQAAAAAAEAQAFAAAVAAABQ1AAAAAABBEAAAAAQAAAABEAAAAAAAQREQAAAAAAAAAAAAAAAAAEEVAAAAAAAAAAAAAAAAAAARUAAAAAAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAD//////////////////////////////////////////////////////3/3/////////////+//v9/n///+w////L////9+9//uvX//9cH///u+///7eX//+3mn//e/w/vr38P/XefD/x/v5/8H////D////x////8/////f////w=='), auto; }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <video id="background_video" autoplay muted loop>
+        <source src="{{ url_for('static', filename='video/background_video.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <audio id="background_audio" loop preload="auto">
+        <source src="{{ url_for('static', filename='audio/background_audio.mp3') }}" type="audio/mpeg">
+    </audio>
+    <div id="audio_button">
+        <div id="audio_toggle">&#9835;</div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            var audio = document.getElementById("intro");
+    
+            var audio_button = document.getElementById("audio_button");
+    
+            audio_button.addEventListener("click", function() {
+                if (audio.paused) {
+                    audio.play();
+                }
+            });
+        });
+    </script>
+
+    <div id="title">Birthday Present</div>
+    <div id="message_container">
+        <p>MSG HERE,<br><br>MSG HERE<br>MSG HERE<br>MSG HERE <br><br>MSG HERE<br>MSG HERE<br><br>MSG HERE</p>
+    </div>
+    <div id="blossom_container"></div>
+
+    <div id="button_container">
+        <img src="{{ url_for('static', filename='pics/sakura.png') }}" alt="Next Button" id="next_button">
+        <span id="button_text">Next</span>
+    </div>
+    <video id="onscreen_video" style="display: none;">
+        <source src="static/video/video1.webm" type="video/webm">
+    </video>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var audio = document.getElementById('background_audio');
+          var playbackPosition = sessionStorage.getItem('audioPlaybackPosition');
+          if (playbackPosition) {
+            audio.currentTime = parseFloat(playbackPosition);
+            audio.play();
+          }
+      
+          window.addEventListener('beforeunload', function() {
+            sessionStorage.setItem('audioPlaybackPosition', audio.currentTime);
+          });
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='blossom.js') }}"></script>
+    
+</body>
+</html>

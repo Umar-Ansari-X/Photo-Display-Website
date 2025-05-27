@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Page</title>
+    <style 
+    type="text/css">body { cursor: url('data:image/x-icon;base64,AAACAAEAICAQAAAAAADoAgAAFgAAACgAAAAgAAAAQAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAtKvrAGSEngC+p+gAhobRAM678gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAQAAAAAEAAAAARQAAAAAAAAAAAAAAAABQAhQQAAAAAAAAAAAAAAABQCAAAAAAAAAAAAAAAAAAAAIAAAAQAAUAAAAAAAAAEAAgIAACBAAAAAAAAAAAAAICAAIiIgAAAAAAAAAAAAAAIAAgAAAgAAAAAAAAAAAAACACAAAUAgAAAAAAAAAAAAAgAgAARQAgFQAAAAAAAAACAAAgAAAAAUMQAAAAEAAAICAAAgAAAAExQAAAAAAEAQAFAAAVAAABQ1AAAAAABBEAAAAAQAAAABEAAAAAAAQREQAAAAAAAAAAAAAAAAAEEVAAAAAAAAAAAAAAAAAAARUAAAAAAAAAAAAAAAAAAAFQAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAD//////////////////////////////////////////////////////3/3/////////////+//v9/n///+w////L////9+9//uvX//9cH///u+///7eX//+3mn//e/w/vr38P/XefD/x/v5/8H////D////x////8/////f////w=='), auto; }
+    </style>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        #background_video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        #onscreen_video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 9999;
+        }
+        #onscreen_video3 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 9999;
+        }
+
+
+
+        :root {
+	        --twinkle-duration: 4s;
+        }
+        .stars-wrapper {
+            position: relative;
+            pointer-events: none;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .stars {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            animation: twinkle var(--twinkle-duration) ease-in-out infinite;
+        }
+        .stars:nth-child(2) {
+            animation-delay: calc(var(--twinkle-duration) * -0.33);
+        }
+        .stars:nth-child(3) {
+            animation-delay: calc(var(--twinkle-duration) * -0.66);
+        }
+        @keyframes twinkle {
+            25% {
+                opacity: 0;
+            }
+        }
+        .star {
+            fill: white;
+        }
+        .star:nth-child(3n) {
+            opacity: 0.8;
+        }
+        .star:nth-child(7n) {
+            opacity: 0.6;
+        }
+        .star:nth-child(13n) {
+            opacity: 0.4;
+        }
+        .star:nth-child(19n) {
+            opacity: 0.2;
+        }
+        .comet {
+            transform-origin: center center;
+            animation: comet 10s linear infinite;
+        }
+        @keyframes comet {
+            0%, 40% {
+                transform: translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            60%, 100% {
+                transform: translateX(-100vmax);
+                opacity: 0;
+            }
+        }
+        .comet-b {
+            animation-delay: -3.3s;
+        }
+        .comet-c {
+            animation-delay: -5s;
+        }
+    </style>
+    <style>
+        @font-face {
+            font-family: 'Beba';
+            src: url('/static/fonts/BebasNeue-Regular.ttf') format('opentype'); 
+        }
+
+        #button_container2 {
+            position: fixed;
+            bottom: 5%;
+            left: 90%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        #next_button2 {
+            width: 120px;
+            height: auto; 
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+
+        #button_container2:hover #next_button2 {
+            transform: scale(1.1);
+        }
+        #button_text2 {
+            position: absolute;
+            top: 49%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Beba', sans-serif;
+            color: white;
+            font-size: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transition: font-size 0.3s ease;
+            z-index: 100;
+        }
+
+        #button_container2:hover #button_text2 {
+            font-size: 24px; 
+        }
+
+
+        #blossom_container {
+            background-color: transparent;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+        }
+
+        .petal {
+            background: url("/static/pics/cherry-blossom.png") no-repeat;
+            
+        }
+
+        .petal-style1 {
+            width: 45px;
+            height: 20px;
+            background-position: -31px 0;
+        }
+
+        .petal-style2 {
+            width: 42px;
+            height: 22px;
+            background-position: 0 -23px;
+        }
+
+        .petal-style3 {
+            width: 37px;
+            height: 24px;
+            background-position: 0 -50px;
+        }
+
+        .petal-style4 {
+            width: 26px;
+            height: 34px;
+            background-position: -49px -35px;
+        }
+
+
+        body {
+            background-color: #4F4E68;
+        }
+        .book {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            perspective: 70rem;
+        }
+
+        .cover {
+            background-color: #36354e;
+            transform: rotateY(0deg);
+            width: 37.5%;
+            height: 100%;
+        }
+
+        .page {
+            top: 0.25rem;
+            left: 0.25rem;
+            background-color: #e9e6c4;
+            transform: rotateY(0deg);
+            width: calc(37.5% - 0.5rem);
+            height: 100%;
+            text-align: right;
+            font-size: 0.74vw;
+            color: #777;
+            font-family: monospace;
+        }
+
+        .page::before,
+        .page::after {
+            display: block;
+            border-top: 0.093vw dashed rgba(0, 0, 0, 0.3); 
+            content: "";
+            padding-bottom: 0.926vw; 
+        }
+
+        .cover,
+        .page {
+            position: absolute;
+            padding: 0.926vw;
+            transform-origin: 100% 0;
+            border-radius: 5px 0 0 5px;
+            box-shadow: inset 0.278vw 0px 1.852vw rgba(0, 0, 0, 0.2), 0px 0px 1.389vw rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        .cover.turn {
+            animation: bookCover 9s forwards;
+            animation-delay: 5s;
+        }
+        .page.turn {
+            animation: bookOpen 9s forwards;
+        }
+        .page:nth-of-type(1) {
+            animation-delay: 6.05s;
+        }
+        .page:nth-of-type(2) {
+            animation-delay: 6.33s
+        }
+        .page:nth-of-type(3) {
+            animation-delay: 6.66s;
+        }
+        .page:nth-of-type(4) {
+            animation: bookOpen150deg 6s forwards;
+            animation-delay: 6.99s;
+        }
+        .page:nth-of-type(5) {
+            animation: bookOpen30deg 6s forwards;
+            animation-delay: 7.2s;
+        }
+        .page:nth-of-type(6) {
+            animation: bookOpen70deg 6s forwards;
+            animation-delay: 7.25s;
+        }
+        @keyframes bookOpen {
+            30% { z-index: 999 }
+            100% {  transform: rotateY(180deg);
+                z-index: 999;}
+        }
+        @keyframes bookCover {
+            30% { z-index: 999 }
+            100% {  transform: rotateY(180deg);
+                z-index: 1;}
+        }
+        @keyframes bookOpen180deg {
+            30% { z-index: 999 }
+            100% {  transform: rotateY(180deg);
+                z-index: 999;}
+        }
+        @keyframes bookOpen70deg {
+            30% { z-index: 999 }
+            100% {  transform: rotateY(70deg);
+                z-index: 999;}
+        }
+        @keyframes bookOpen30deg {
+            50% { z-index: 999 }
+            100% {  transform: rotateY(30deg);
+                z-index: 999;}
+        }
+
+
+        @font-face {
+            font-family: 'Sakura';
+            src: url('/static/fonts/Sakura.otf') format('opentype'); 
+        }
+
+        #quote_container {
+            font-family: 'Sakura', sans-serif;
+            position: absolute;
+            top: 69%;
+            left: 45%;
+            width: 17%;
+            height: auto; 
+            opacity: 0; 
+            transition: opacity 2s, transform 0.3s;
+            z-index: 100;
+            overflow: hidden; 
+            font-size: 30px;
+            text-align: center;
+        }
+
+        #quote_container.active {
+            opacity: 1;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #book_image_container {
+            position: absolute;
+            top: 26%;
+            left: 47%;
+            width: 12%;
+            max-height: 60%;
+            opacity: 0; 
+            transition: opacity 2s, transform 0.3s;
+            z-index: 10001;
+            overflow: hidden; 
+        }
+
+        #book_image_container img {
+            max-width: 100%;
+            max-height: 100%;
+            height: auto;
+        }
+
+        #book_image_container.active {
+            opacity: 1;
+        }
+
+        #book_image_container:hover {
+            transform: scale(2);
+            z-index: 1002;
+        }
+
+
+        #button_container {
+            position: fixed;
+            bottom: 45%;
+            left: 65%;
+            transform: translateX(-50%);
+            z-index: 100;
+        }
+
+        #next_button {
+            width: 80px;
+            height: auto; 
+            transition: transform 0.3s ease;
+            z-index: 100;
+        }
+
+        #button_container:hover #next_button {
+            transform: scale(1.1);
+        }
+
+
+
+
+        @keyframes fadeInImage {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+
+
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var onscreenVideo = document.getElementById("onscreen_video");
+
+            onscreenVideo.addEventListener("ended", function() {
+                var book = document.querySelector(".book");
+                book.classList.add("turn");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="blossom_container"></div>
+    <script src="{{ url_for('static', filename='blossom.js') }}"></script>
+    
+    <audio id="background_audio" loop preload="auto">
+        <source src="static/audio/background_audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+
+    <video id="background_video" autoplay muted loop>
+        <source src="static/video/background2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <video id="onscreen_video" autoplay>
+        <source src="static/video/video2.webm" type="video/webm">
+        Your browser does not support the video tag.
+    </video>
+
+
+    <div class="book">
+        <span class="page turn"></span>
+        <span class="page turn"></span>
+        <span class="page turn"></span>
+        <span class="page turn"></span>
+        <span class="page turn"></span>
+        <span class="page turn"></span>
+        <span class="cover"></span>
+        <span class="page"></span>
+        <span class="cover turn"></span>
+
+    </div>
+
+    <div id="book_image_container" class="hidden">
+        <img src="static/pics/(1).png" alt="Book Image">
+    </div>
+
+    <div id="button_container">
+        <img src="{{ url_for('static', filename='pics/arrow.png') }}" alt="Next Button" id="next_button">
+    </div>
+
+    <div id="quote_container" class="hidden">
+        <p id="quote">"Another year of love and laughter."</p>
+    </div>
+
+    <script>
+        var audio = document.getElementById("background_audio");
+    
+        var params = new URLSearchParams(window.location.search);
+        var position = params.get("position");
+        
+        if (position !== null) {
+            audio.currentTime = parseFloat(position);
+    }        
+            audio.play();
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var onscreenVideo = document.getElementById("onscreen_video");
+
+            onscreenVideo.addEventListener("ended", function() {
+                onscreenVideo.style.zIndex = "-1"; 
+            });
+        });
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const imageContainer = document.getElementById("book_image_container");
+        const quoteContainer = document.getElementById("quote_container");
+
+        setTimeout(function() {
+            imageContainer.classList.add("active");
+            quoteContainer.classList.add("active");
+        }, 12500); 
+    });
+
+    const nextButton = document.getElementById("next_button");
+    const imageContainer = document.getElementById("book_image_container");
+    const quoteContainer = document.getElementById("quote_container");
+    const images = [
+            "static/pics/(1).png",
+            "static/pics/(2).png",
+            "static/pics/(3).png",
+            "static/pics/(4).png",
+            "static/pics/(5).png",
+            "static/pics/(6).png",
+            "static/pics/(7).png",
+            "static/pics/(8).png",
+            "static/pics/(9).png",
+            "static/pics/(10).png",
+            "static/pics/(11).png",
+            "static/pics/(12).png",
+            "static/pics/(13).png",
+            "static/pics/(14).png",
+            "static/pics/(15).png",
+            "static/pics/(16).png",
+            "static/pics/(17).png",
+            "static/pics/(18).png",
+            "static/pics/(19).png",
+            "static/pics/(20).png",
+            "static/pics/(21).png",
+            "static/pics/(22).png",
+            "static/pics/(23).png",
+            "static/pics/(24).png",
+            "static/pics/(25).png",
+            "static/pics/(26).png",
+            "static/pics/(27).png",
+            "static/pics/(28).png",
+            "static/pics/(29).png",
+            "static/pics/(30).png",
+            "static/pics/(31).png",
+            "static/pics/(32).png",
+            "static/pics/(33).png",
+            "static/pics/(34).png",
+            "static/pics/(35).png",
+            "static/pics/(36).png",
+            "static/pics/(37).png",
+            "static/pics/(38).png",
+            "static/pics/(39).png",
+            "static/pics/(40).png"
+            ];
+
+        const quotes = [
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”",
+        "“quotes”"
+            ];
+
+    let currentImageIndex = 0;
+
+    function showNextImage() {
+        imageContainer.classList.remove("active");
+        imageContainer.classList.add("hidden");
+
+        quoteContainer.classList.remove("active"); 
+        quoteContainer.classList.add("hidden");
+
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        const currentQuoteIndex = currentImageIndex % quotes.length;
+
+        setTimeout(function() {
+            const image = imageContainer.querySelector("img");
+            image.src = images[currentImageIndex];
+
+            const quote = quoteContainer.querySelector("#quote");
+            quote.textContent = quotes[currentQuoteIndex]; 
+
+            imageContainer.classList.remove("hidden");
+            imageContainer.classList.add("active");
+
+            quoteContainer.classList.remove("hidden");
+            quoteContainer.classList.add("active"); 
+        }, 1000); 
+    }
+
+    nextButton.addEventListener("click", showNextImage);
+
+
+</script>
+
+
+
+    
+
+    <div id="button_container2">
+        <img src="{{ url_for('static', filename='pics/sakura.png') }}" alt="Next Button2" id="next_button2">
+        <span id="button_text2">Back</span>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var buttonContainer = document.getElementById("button_container2");
+            var onscreenVideo = document.getElementById("onscreen_video3");
+
+            buttonContainer.addEventListener("click", function() {
+
+
+                onscreenVideo.style.zIndex = "100000";
+
+                onscreenVideo.style.display = "block";
+                onscreenVideo.play();
+
+                
+
+                onscreenVideo.addEventListener("ended", function() {
+                    var audio = document.getElementById("background_audio");
+                    window.location.href = "/menu?position="+ audio.currentTime;
+                });
+            });
+        });
+    </script>
+
+    <video id="onscreen_video3" style="display: none;">
+        <source src="static/video/video1.webm" type="video/webm">
+    </video>
+
+
+
+<div class="stars-wrapper">
+    <script type="text/javascript">
+        for (var s = 0; s < 3; ++s) {
+            var starsSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            starsSvg.setAttribute("class", "stars");
+            starsSvg.setAttribute("width", "100%");
+            starsSvg.setAttribute("height", "100%");
+            starsSvg.setAttribute("preserveAspectRatio", "none");
+            
+            for (var i = 0; i < 200; ++i) {
+                var cx = Math.round(Math.random() * 10000) / 100 + '%';
+                var cy = Math.round(Math.random() * 10000) / 100 + '%';
+                var r = Math.round((Math.random() + 0.5) * 10) / 10;
+                
+                var starCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                starCircle.setAttribute("class", "star");
+                starCircle.setAttribute("cx", cx);
+                starCircle.setAttribute("cy", cy);
+                starCircle.setAttribute("r", r);
+                
+                starsSvg.appendChild(starCircle);
+            }
+
+            document.querySelector(".stars-wrapper").appendChild(starsSvg);
+        }
+    </script>
+
+
+</div>
+</body>
+</html>
